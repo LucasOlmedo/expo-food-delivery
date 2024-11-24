@@ -3,5 +3,26 @@ services:
     build: .
     volumes:
       - ./:/app
+    networks:
+      - app-network
+  expo:
+    build: .
+    volumes:
+      - ./:/app
+      - /app/node_modules
     ports:
-      - "3000:3000"
+      - "19000:19000"
+      - "19001:19001"
+      - "19002:19002"
+      - "19006:19006"
+      - "8081:8081"
+    environment:
+      - EXPO_DEVTOOLS_LISTEN_PORT=19006
+    networks:
+      - app-network
+    stdin_open: true
+    tty: true
+
+networks:
+  app-network:
+    driver: bridge
