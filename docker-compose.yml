@@ -3,6 +3,10 @@ services:
     build: .
     volumes:
       - ./:/app
+      - ./db.json:/app/db.json
+    ports:
+      - "3000:3000"
+    command: npx json-server --watch db.json --port 3000
     networks:
       - app-network
   expo:
